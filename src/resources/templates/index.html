@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Donations - Tapakila</title>
+</head>
+<body>
+<h1>Faire un don</h1>
+
+<form method="post" th:action="@{/donate}" th:object="${newDonation}">
+    <label>Email :</label>
+    <input type="email" th:field="*{email}" required />
+    <br/>
+
+    <label>Méthode de paiement :</label>
+    <select th:field="*{paymentMethod}">
+        <option value="MOBILE_MONEY">Mobile Money</option>
+        <option value="BANK_TRANSFER">Virement bancaire</option>
+        <option value="CASH">Cash</option>
+    </select>
+    <br/>
+
+    <label>Référence :</label>
+    <input type="text" th:field="*{reference}" required />
+    <br/>
+
+    <button type="submit">Donner !</button>
+</form>
+
+<hr/>
+
+<div>
+    <h2>Historique</h2>
+    <ul>
+        <li th:each="donation : ${donations}">
+            + [[${donation.payment.amount}]] Ar
+            ([[${donation.payment.status}]]) via [[${donation.payment.method}]]
+            par [[${donation.donor.email}]])
+        </li>
+
+        <li th:each="help : ${helps}">
+            - [[${help.payment.amount}]] Ar pour [[${help.beneficiary.fullName}]]
+            ([[${help.payment.status}]])
+        </li>
+    </ul>
+</div>
+</body>
+</html>

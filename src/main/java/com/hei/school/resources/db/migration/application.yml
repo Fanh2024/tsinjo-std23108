@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tsinjo
+    username: user
+    password: pass
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  thymeleaf:
+    cache: false
+  profiles:
+    active: dev
+
+vola:
+  apiKey: "VOLA_API_KEY"
